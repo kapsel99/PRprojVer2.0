@@ -2,6 +2,7 @@ import cv2
 import face_recognition
 import pyttsx3
 import numpy as np
+import time
 
 def getFile(path):
     DATA = []
@@ -47,3 +48,12 @@ def identification(encodeFace, knownFaces):
     faceDis = face_recognition.face_distance(knownFaces,encodeFace)
     matchIndex = np.argmin(faceDis)
     return matchIndex, matches[matchIndex]
+
+def getFPS(lastTime):
+    curTime = time.time()
+    fps = 1.0 / (curTime - lastTime)
+    return fps, curTime
+
+def drawRec(frame, loc, col):
+    y1,x2,y2,x1 = loc
+    cv2.rectangle(frame,(x1,y1),(x2,y2),col,2)
