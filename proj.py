@@ -8,7 +8,7 @@ from mylib import getFile, findEncodings, speak, getImages, recognition, identif
 def main():
     synthesizer = pyttsx3.init()
 
-    path = "projekt\\zdjecia\\"
+    path = "zdjecia\\"
     lines = getFile(path + "data.txt")
     images, taunts = getImages(path, lines)
     encodeListKnown = findEncodings(images)
