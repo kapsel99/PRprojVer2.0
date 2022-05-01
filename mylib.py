@@ -57,3 +57,16 @@ def getFPS(lastTime):
 def drawRec(frame, loc, col):
     y1,x2,y2,x1 = loc
     cv2.rectangle(frame,(x1,y1),(x2,y2),col,2)
+
+def setLanguage(engine, language):
+    language=language.lower()
+    for voice in engine.getProperty('voices'):
+        voiceName = voice.name.lower()
+        voiceLanguage = ""
+        if len(voice.languages):
+            voiceLanguage = voice.languages.lower()
+
+        if language in voiceLanguage or language in voiceName:
+            engine.setProperty('voice', voice.id)
+            return True
+    print("Language '{}' not found".format(language))

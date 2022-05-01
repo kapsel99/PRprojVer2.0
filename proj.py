@@ -1,4 +1,3 @@
-#import mylib
 import cv2
 import face_recognition
 import pyttsx3
@@ -7,13 +6,16 @@ import time
 from mylib import *
 
 
-
 def main():
     green = (0,255,0)
     red = (0,0,255)
     blue = (255,0,0) #colors
 
     synthesizer = pyttsx3.init()
+    synthesizer.setProperty('rate',200)
+    synthesizer.setProperty('volume',0.5)
+    # setLanguage(synthesizer,'polish')
+    setLanguage(synthesizer,'english')
 
     path = "zdjecia\\"
     lines = getFile(path + "data.txt")
