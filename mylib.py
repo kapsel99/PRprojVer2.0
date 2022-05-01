@@ -63,8 +63,8 @@ def setLanguage(engine, language):
     for voice in engine.getProperty('voices'):
         voiceName = voice.name.lower()
         voiceLanguage = ""
-        if len(voice.languages):
-            voiceLanguage = voice.languages.lower()
+        # if len(voice.languages):
+        #     voiceLanguage = voice.languages.lower()
 
         if language in voiceLanguage or language in voiceName:
             engine.setProperty('voice', voice.id)

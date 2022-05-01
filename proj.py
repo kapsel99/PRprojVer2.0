@@ -3,6 +3,7 @@ import face_recognition
 import pyttsx3
 import numpy as np
 import time
+import sys
 from mylib import *
 
 
@@ -24,6 +25,10 @@ def main():
     print('Encoding Complete')
 
     cam = cv2.VideoCapture(0) #front camera
+    if not cam.isOpened():
+        print("Could not open video")
+        sys.exit()
+
     lastTime = time.time()
 
     while True:
