@@ -45,7 +45,7 @@ Po kolei importujemy biblioteki:
 
 Jeżeli pojawił się jakikolwiek błąd to znaczy, że coś wcześniej nie poszło dobrze.
 
-##Importowanie źródeł z GItHuba
+## Importowanie źródeł z GItHuba
 
 Kod możemy porbać takim jakim jest. Na stronie repozytorium klikamy Code->download zip i wypakowujemy gdzie chcemy.
 
