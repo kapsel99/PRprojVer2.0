@@ -22,7 +22,7 @@ def findEncodings(images):
     return encodelist
 
 def speak(synt, text):
-    synt.say(text)           
+    synt.say(text)
     synt.runAndWait()
     synt.stop()
 
@@ -70,3 +70,25 @@ def setLanguage(engine, language):
             engine.setProperty('voice', voice.id)
             return True
     print("Language '{}' not found".format(language))
+
+def addingFace(img):
+
+    face_id = 0
+    count = 0
+    face_id = face_id + 1
+    print("[INFO] Wykonuje zdjecia")
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+    faces = face_detector.detectMultiScale(gray, 1.3, 5)
+    name = input('Enter your name: ') #bedzie czekalo na wypowiedzenie imienia
+    while (True):
+        for (x, y, w, h) in faces:
+            count += 1
+            # Save the captured image into the datasets folder
+            cv2.imwrite("zdjecia/" + str(name) + '.' + str(face_id) + ".jpg", img)
+            if count == 1:
+                f = open("zdjecia/data.txt", "a")
+                f.write(str(name) + '.' + str(face_id) + ".jpg;Hello " + str(name) + '\n')
+                f.close()
+        if count >= 2:
+            break

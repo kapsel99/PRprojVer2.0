@@ -1,3 +1,2 @@
-putin.jpg;go away
-queen.jpg;god save the queen
-pope.jpg;deus vult
+lewy.jpg;lewy
+messi.1.jpg;Hello messi
