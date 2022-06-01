@@ -71,24 +71,26 @@ def setLanguage(engine, language):
             return True
     print("Language '{}' not found".format(language))
 
-def addingFace(img):
+def checkingID(filenane):
+    file = filenane
+    with open(file,'r') as fi:
+        for line in fi:
+            pass
+        last_line = line
+    last_line = line.split(".")[1]
+    number = last_line
 
-    face_id = 0
-    count = 0
+    return number
+
+
+def addingFace(img):
+    filename = 'zdjecia/data.txt'
+    face_id = int(checkingID(filename))
     face_id = face_id + 1
     print("[INFO] Wykonuje zdjecia")
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-    faces = face_detector.detectMultiScale(gray, 1.3, 5)
     name = input('Enter your name: ') #bedzie czekalo na wypowiedzenie imienia
-    while (True):
-        for (x, y, w, h) in faces:
-            count += 1
-            # Save the captured image into the datasets folder
-            cv2.imwrite("zdjecia/" + str(name) + '.' + str(face_id) + ".jpg", img)
-            if count == 1:
-                f = open("zdjecia/data.txt", "a")
-                f.write(str(name) + '.' + str(face_id) + ".jpg;Hello " + str(name) + '\n')
-                f.close()
-        if count >= 2:
-            break
+    cv2.imwrite("zdjecia/" +  (name) + '.' + str(face_id) + ".jpg", img)
+    f = open("zdjecia/data.txt", "a")
+    f.write(str(name) + '.' + str(face_id) + ".jpg;Hello " + str(name) + '\n')
+    f.close()
+    print("Picture taken!")
