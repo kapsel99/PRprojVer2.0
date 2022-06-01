@@ -55,10 +55,6 @@ def main():
         k = cv2.waitKey(1)
         # Ponaciśnieciu przycisku 1 (przy raspberry jakis przycisk, przy GUI podobnie)
         if k == 49:
-            if target:
-                print("Spierdalaj")
-                speak(synthesizer, 'Spierdalaj!')
-            else:
                 addingFace(img)
         #if k == 32: #po nacisnieciu spacji resetuje kamere
          #   print("Restarting camera, please wait!")
