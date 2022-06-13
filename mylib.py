@@ -83,7 +83,13 @@ def checkingID(filenane):
     return number
 
 
-def addingFace(img):
+def addingFace(img, taunts, list):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    imgEncoded = face_recognition.face_encodings(img)
+    if(0==len(imgEncoded)):
+        print("Fail to recognize face")
+        return
+
     filename = 'zdjecia/data.txt'
     face_id = int(checkingID(filename))
     face_id = face_id + 1
@@ -91,6 +97,9 @@ def addingFace(img):
     name = input('Enter your name: ') #bedzie czekalo na wypowiedzenie imienia
     cv2.imwrite("zdjecia/" +  (name) + '.' + str(face_id) + ".jpg", img)
     f = open("zdjecia/data.txt", "a")
-    f.write(str(name) + '.' + str(face_id) + ".jpg;Hello " + str(name) + '\n')
+    taunt = "Hello " + name
+    f.write(str(name) + '.' + str(face_id) + ".jpg;" + taunt + '\n')
     f.close()
     print("Picture taken!")
+    taunts.append(taunt)    
+    list.append(imgEncoded[0])

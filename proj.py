@@ -6,6 +6,7 @@ import pyttsx3
 import numpy as np
 import time
 import sys
+import copy
 from mylib import *
 
 def main():
@@ -18,7 +19,7 @@ def main():
     synthesizer.setProperty('volume', 0.5)
     setLanguage(synthesizer,'polish')
     # setLanguage(synthesizer, 'english')
-    path = "zdjecia\\"
+    path = "zdjecia/"
     lines = getFile(path + "data.txt")
     images, taunts = getImages(path, lines)
     encodeListKnown = findEncodings(images)
@@ -32,7 +33,8 @@ def main():
     lastTime = time.time()
 
     while True:
-        success, img = cam.read()
+        success, imgCam = cam.read()
+        img = copy.copy(imgCam)
 
         facesCurFrame, encodesCurFrame = recognition(img)
 
@@ -55,7 +57,7 @@ def main():
         k = cv2.waitKey(1)
         # Ponaciśnieciu przycisku 1 (przy raspberry jakis przycisk, przy GUI podobnie)
         if k == 49:
-                addingFace(img)
+            addingFace(imgCam, taunts, encodeListKnown)
         #if k == 32: #po nacisnieciu spacji resetuje kamere
          #   print("Restarting camera, please wait!")
           #  os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
@@ -63,6 +65,7 @@ def main():
         #ale wtedy nie dziala zamykanie pliku xD
         if k == 27:
             break
+
     cam.release()
 
 if __name__ == "__main__":
