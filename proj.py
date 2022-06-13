@@ -13,6 +13,7 @@ def main():
     green = (0, 255, 0)
     red = (0, 0, 255)
     blue = (255, 0, 0)  # colors
+    waitTime = 10 #czas jaki czeka z wykryciem tej samej osoby
 
     synthesizer = pyttsx3.init()
     synthesizer.setProperty('rate', 200)
@@ -24,6 +25,7 @@ def main():
     images, taunts = getImages(path, lines)
     encodeListKnown = findEncodings(images)
     print('Encoding Complete')
+    detectionTimes=np.zeros(len(taunts)) - waitTime
 
     cam = cv2.VideoCapture(0)  # front camera
     if not cam.isOpened():
@@ -47,7 +49,12 @@ def main():
                 text = taunts[id].upper()
                 print(text)
                 drawRec(img, faceLoc, red)
-                speak(synthesizer, text)
+                
+                while(len(detectionTimes)<=id):
+                    detectionTimes = np.append(detectionTimes, [lastTime-waitTime-1])                  
+                if(lastTime > detectionTimes[id] + waitTime):
+                    detectionTimes[id] = lastTime
+                    speak(synthesizer, text)
 
 
         fps, lastTime = getFPS(lastTime)
